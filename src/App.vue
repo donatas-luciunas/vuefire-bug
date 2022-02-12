@@ -1,8 +1,10 @@
 <template>
   <div>
     <p>Expected: {{ expected }}</p>
-    <p v-if="!thing">Thing not exist</p>
-    <p v-else>Actual: {{ thing.ref }}</p>
+    <p v-if="thing">Actual: {{ thing.ref }}</p>
+    <p v-if="thingDeep">
+      Actual deep: {{ thingDeep.ref && "things/" + thingDeep.ref.id }}
+    </p>
   </div>
 </template>
 
@@ -11,6 +13,7 @@ export default {
   data() {
     return {
       thing: null,
+      thingDeep: null,
       thingRef: window.firebase.firestore().doc("things/DLF1nEvrEeLAXisqobSe"),
       expected: "",
     };
@@ -18,21 +21,22 @@ export default {
 
   created() {
     this.$bind("thing", this.thingRef, { maxRefDepth: 0 });
+    this.$bind("thingDeep", this.thingRef, { maxRefDepth: 1 });
 
-    setInterval(() => {
+    setInterval(async () => {
       if (this.expected) {
-        this.thingRef.update({
+        await this.thingRef.update({
           ref: null,
         });
         this.expected = "";
       } else {
         const docId = "things/SsEQz3ZHySgck5wT7Idy";
-        this.thingRef.update({
+        await this.thingRef.update({
           ref: window.firebase.firestore().doc(docId),
         });
         this.expected = docId;
       }
-    }, 2000);
+    }, 3000);
   },
 };
 </script>
