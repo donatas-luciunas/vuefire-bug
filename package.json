@@ -1,0 +1,22 @@
+{
+  "name": "vue2-starter",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "vue-serve": "vue-cli-service serve",
+    "vue-build": "vue-cli-service build",
+    "vue-build-watch": "vue-cli-service build --mode development --watch",
+    "emulate": "firebase --project temp emulators:start --import=.dir --export-on-exit"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^4.5.13",
+    "firebase-tools": "^9.16.0",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "dependencies": {
+    "@vue/composition-api": "^1.0.0-rc.11",
+    "install": "^0.13.0",
+    "vue": "^2.6.14",
+    "vuefire": "^2.2.5"
+  }
+}
