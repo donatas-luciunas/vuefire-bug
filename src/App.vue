@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Expected: {{ expected }}</p>
-    <p v-if="thing">Actual: {{ thing.ref }}</p>
+    <p v-if="thing">Actual: {{ thing.ref && thing.ref.path }}</p>
     <p v-if="thingDeep">
       Actual deep: {{ thingDeep.ref && "things/" + thingDeep.ref.id }}
     </p>
